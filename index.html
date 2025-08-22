@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>计分器 - Scorer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 运动选择页面 -->
+    <div id="sportSelection" class="page active">
+      <div class="container">
+        <div class="sport-options">
+          <div class="sport-card" data-sport="pingpong">
+            <div class="sport-icon">🏓</div>
+            <h3>乒乓球</h3>
+            <p>11分制，先得11分获胜</p>
+          </div>
+          <div class="sport-card" data-sport="badminton">
+            <div class="sport-icon">🏸</div>
+            <h3>羽毛球</h3>
+            <p>21分制，先得21分获胜</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 计分器主界面 -->
+    <div id="scorerPage" class="page">
+      <!-- 全屏退出按钮 -->
+      <button id="fullscreenExitBtn" class="fullscreen-exit-btn" title="退出全屏" style="display: none;">✕</button>
+      
+      <div class="header">
+        <button id="backBtn" class="back-btn">← 返回</button>
+        <h2 id="sportTitle">计分器</h2>
+        <div class="header-controls">
+          <button id="fullscreenToggle" class="fullscreen-btn" title="进入全屏">⛶</button>
+          <button id="themeToggle" class="theme-btn">🎨</button>
+          <button id="settingsBtn" class="settings-btn">⚙️</button>
+        </div>
+      </div>
+
+      <!-- 计分板 -->
+      <div class="scoreboard">
+        <div class="player player1" data-player="1">
+          <div
+            class="match-point-indicator player1-match-point"
+            id="player1MatchPoint"
+            style="display: none"
+          >
+            <span class="match-point-text">赛点</span>
+            <span class="match-point-emoji">🎉</span>
+          </div>
+          <div class="player-name" id="player1Display">运动员1</div>
+          <div class="score" id="score1">0</div>
+          <div class="sets" id="sets1">0</div>
+        </div>
+
+        <div class="vs-section">
+          <div class="vs-text">VS</div>
+          <div class="current-set" id="currentSet">第1局</div>
+        </div>
+
+        <div class="player player2" data-player="2">
+          <div
+            class="match-point-indicator player2-match-point"
+            id="player2MatchPoint"
+            style="display: none"
+          >
+            <span class="match-point-text">赛点</span>
+            <span class="match-point-emoji">🎉</span>
+          </div>
+          <div class="player-name" id="player2Display">运动员2</div>
+          <div class="score" id="score2">0</div>
+          <div class="sets" id="sets2">0</div>
+        </div>
+      </div>
+      <!-- 局数控制 -->
+      <div class="set-controls">
+        <button id="nextSetBtn" class="set-btn">下一局</button>
+        <button id="resetBtn" class="reset-btn">重置比赛</button>
+      </div>
+    </div>
+
+    <!-- 设置弹窗 -->
+    <div id="settingsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>设置</h3>
+          <button id="closeSettings" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-item">
+            <label>配色方案</label>
+            <div class="theme-options">
+              <button class="theme-option active" data-theme="black-white">
+                黑白色
+              </button>
+              <button class="theme-option" data-theme="red-blue">红蓝色</button>
+              <div class="setting-item-auto-match-point">
+                <div>自动赛点提示</div>
+                <input type="checkbox" id="autoMatchPoint" checked />
+              </div>
+            </div>
+          </div>
+          <div class="setting-item">
+            <label>运动员姓名</label>
+            <div class="player-name-inputs">
+              <div class="player-name-input">
+                <label for="player1Name">运动员1</label>
+                <input
+                  type="text"
+                  id="player1Name"
+                  placeholder="输入姓名"
+                  value="运动员1"
+                />
+              </div>
+              <div class="player-name-input">
+                <label for="player2Name">运动员2</label>
+                <input
+                  type="text"
+                  id="player2Name"
+                  placeholder="输入姓名"
+                  value="运动员2"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="setting-item">
+            <label>分段设置</label>
+            <div class="segment-inputs">
+              <div class="segment-input">
+                <label for="segment1">第1段</label>
+                <input
+                  type="number"
+                  id="segment1"
+                  min="1"
+                  max="50"
+                  value="11"
+                />
+              </div>
+              <div class="segment-input">
+                <label for="segment2">第2段</label>
+                <input
+                  type="number"
+                  id="segment2"
+                  min="1"
+                  max="50"
+                  value="21"
+                />
+              </div>
+              <div class="segment-input">
+                <label for="segment3">第3段</label>
+                <input
+                  type="number"
+                  id="segment3"
+                  min="1"
+                  max="50"
+                  value="31"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
