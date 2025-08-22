@@ -40,6 +40,7 @@ let segment1Input, segment2Input, segment3Input;
 let player1Area, player2Area;
 let player1MatchPoint, player2MatchPoint;
 let fullscreenToggle, fullscreenExitBtn;
+let player1ServeIndicator, player2ServeIndicator;
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
@@ -111,6 +112,8 @@ function getDOMElements() {
     player2Area = document.querySelector('.player.player2');
     player1MatchPoint = document.getElementById('player1MatchPoint');
     player2MatchPoint = document.getElementById('player2MatchPoint');
+    player1ServeIndicator = document.getElementById('player1ServeIndicator');
+    player2ServeIndicator = document.getElementById('player2ServeIndicator');
     
     console.log('DOM元素获取完成');
     console.log('运动卡片数量:', sportCards.length);
@@ -425,6 +428,9 @@ function selectSport(sport) {
     
     // 重置比赛
     resetMatch();
+    
+    // 初始化发球提示
+    updateServeIndicator();
 }
 
 function goBackToSelection() {
@@ -450,6 +456,9 @@ function addScore(playerIndex, points) {
     
     // 更新显示
     updateScoreDisplay();
+    
+    // 更新发球提示
+    updateServeIndicator();
     
     // 检查是否获胜
     checkWinCondition(playerIndex - 1);
@@ -523,12 +532,40 @@ function hideMatchPoint() {
     if (player2MatchPoint) player2MatchPoint.style.display = 'none';
 }
 
+function updateServeIndicator() {
+    if (!player1ServeIndicator || !player2ServeIndicator) return;
+    
+    // 计算总分
+    const totalScore = scores[0] + scores[1];
+    
+    // 根据运动规则确定发球顺序
+    let servingPlayer = 1; // 默认运动员1发球
+    
+    if (currentSport === 'pingpong') {
+        // 乒乓球：每2分换发球
+        servingPlayer = Math.floor(totalScore / 2) % 2 === 0 ? 1 : 2;
+    } else if (currentSport === 'badminton') {
+        // 羽毛球：每1分换发球
+        servingPlayer = totalScore % 2 === 0 ? 1 : 2;
+    }
+    
+    // 更新发球提示显示
+    if (servingPlayer === 1) {
+        player1ServeIndicator.style.display = 'flex';
+        player2ServeIndicator.style.display = 'none';
+    } else {
+        player1ServeIndicator.style.display = 'none';
+        player2ServeIndicator.style.display = 'flex';
+    }
+}
+
 function nextSet() {
     currentSet++;
     scores = [0, 0];
     updateScoreDisplay();
     updateCurrentSetDisplay();
     hideMatchPoint();
+    updateServeIndicator();
 }
 
 function resetMatch() {
@@ -539,6 +576,7 @@ function resetMatch() {
     updateSetDisplay();
     updateCurrentSetDisplay();
     hideMatchPoint();
+    updateServeIndicator();
 }
 
 function updateSetDisplay() {

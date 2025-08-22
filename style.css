@@ -268,6 +268,25 @@ body {
     animation: matchPointBreathing 2s ease-in-out infinite;
 }
 
+/* 发球提示指示器 */
+.serve-indicator {
+    position: absolute;
+    top: 0.625rem;
+    left: 0.625rem;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.3125rem;
+    box-shadow: 0 0.25rem 0.9375rem rgba(40, 167, 69, 0.4);
+    animation: serveIndicatorPulse 2s ease-in-out infinite;
+}
+
 .match-point-text {
     font-size: 0.8rem;
 }
@@ -275,6 +294,15 @@ body {
 .match-point-emoji {
     font-size: 1rem;
     animation: emojiBounce 1.5s ease-in-out infinite;
+}
+
+.serve-text {
+    font-size: 0.8rem;
+}
+
+.serve-emoji {
+    font-size: 1rem;
+    animation: serveEmojiSpin 2s linear infinite;
 }
 
 /* 呼吸效果动画 */
@@ -296,6 +324,28 @@ body {
     }
     50% {
         transform: translateY(-0.1875rem);
+    }
+}
+
+/* 发球提示脉冲动画 */
+@keyframes serveIndicatorPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* 发球emoji旋转动画 */
+@keyframes serveEmojiSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }
 
@@ -349,6 +399,19 @@ body.theme-black-white .reset-btn:hover {
     background: #c82333;
     border-color: #bd2130;
     box-shadow: 0 0.375rem 0.75rem rgba(220, 53, 69, 0.4);
+}
+
+/* 黑白色主题的发球提示样式 */
+body.theme-black-white .serve-indicator {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: 0.125rem solid #20c997;
+    box-shadow: 0 0.25rem 0.5rem rgba(40, 167, 69, 0.3);
+}
+
+body.theme-black-white .serve-indicator:hover {
+    background: linear-gradient(135deg, #20c997, #17a2b8);
+    border-color: #17a2b8;
+    box-shadow: 0 0.375rem 0.75rem rgba(40, 167, 69, 0.4);
 }
 
 .player-name {
@@ -441,6 +504,19 @@ body.theme-black-white .reset-btn:hover {
     border-color: #bd2130;
     box-shadow: 0 0.375rem 0.75rem rgba(220, 53, 69, 0.4);
     transform: translateY(-0.125rem);
+}
+
+/* 默认主题的发球提示样式 */
+.serve-indicator {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: 0.125rem solid #20c997;
+    box-shadow: 0 0.25rem 0.5rem rgba(40, 167, 69, 0.3);
+}
+
+.serve-indicator:hover {
+    background: linear-gradient(135deg, #20c997, #17a2b8);
+    border-color: #17a2b8;
+    box-shadow: 0 0.375rem 0.75rem rgba(40, 167, 69, 0.4);
 }
 
 /* 设置弹窗 */
@@ -880,6 +956,22 @@ body.theme-red-blue .fullscreen-btn:hover {
         padding: 1rem;
         min-height: auto;
     }
+    
+    /* 全屏模式下发球提示优化 */
+    .fullscreen-mode .serve-indicator {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.75rem 1rem;
+        font-size: 1.1rem;
+    }
+    
+    .fullscreen-mode .serve-text {
+        font-size: 1rem;
+    }
+    
+    .fullscreen-mode .serve-emoji {
+        font-size: 1.2rem;
+    }
 }
 
 /* 全屏模式下的移动端通用优化 */
@@ -929,6 +1021,22 @@ body.theme-red-blue .fullscreen-btn:hover {
         padding: 0.75rem;
         min-height: auto;
     }
+    
+    /* 全屏模式移动端发球提示优化 */
+    .fullscreen-mode .serve-indicator {
+        top: 0.75rem;
+        left: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .fullscreen-mode .serve-text {
+        font-size: 0.8rem;
+    }
+    
+    .fullscreen-mode .serve-emoji {
+        font-size: 1rem;
+    }
 }
 
 /* 全屏模式下的横屏优化 */
@@ -953,6 +1061,22 @@ body.theme-red-blue .fullscreen-btn:hover {
     .fullscreen-mode .current-set {
         font-size: 1.5rem;
         padding: 0.8rem 1.6rem;
+    }
+    
+    /* 全屏模式横屏发球提示优化 */
+    .fullscreen-mode .serve-indicator {
+        top: 1.25rem;
+        left: 1.25rem;
+        padding: 1rem 1.25rem;
+        font-size: 1.3rem;
+    }
+    
+    .fullscreen-mode .serve-text {
+        font-size: 1.2rem;
+    }
+    
+    .fullscreen-mode .serve-emoji {
+        font-size: 1.4rem;
     }
 }
 
@@ -982,6 +1106,19 @@ body.theme-red-blue .reset-btn:hover {
     background: #ee5a24;
     border-color: #d63031;
     box-shadow: 0 0.375rem 0.75rem rgba(255, 107, 107, 0.4);
+}
+
+/* 红蓝色主题的发球提示样式 */
+body.theme-red-blue .serve-indicator {
+    background: linear-gradient(135deg, #20c997, #17a2b8);
+    border: 0.125rem solid #17a2b8;
+    box-shadow: 0 0.25rem 0.5rem rgba(32, 201, 151, 0.3);
+}
+
+body.theme-red-blue .serve-indicator:hover {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    border-color: #138496;
+    box-shadow: 0 0.375rem 0.75rem rgba(32, 201, 151, 0.4);
 }
 
 /* 移动端横屏适配 */
@@ -1106,6 +1243,22 @@ body.theme-red-blue .reset-btn:hover {
     .match-point-emoji {
         font-size: 0.9rem;
     }
+    
+    /* 移动端发球提示调整 */
+    .serve-indicator {
+        top: 0.3125rem;
+        left: 0.3125rem;
+        padding: 0.375rem 0.625rem;
+        font-size: 0.8rem;
+    }
+    
+    .serve-text {
+        font-size: 0.7rem;
+    }
+    
+    .serve-emoji {
+        font-size: 0.9rem;
+    }
 }
 
 /* 超小屏幕适配 */
@@ -1155,6 +1308,22 @@ body.theme-red-blue .reset-btn:hover {
     .set-btn, .reset-btn {
         padding: 0.875rem;
         font-size: 1rem;
+    }
+    
+    /* 超小屏幕发球提示调整 */
+    .serve-indicator {
+        top: 0.25rem;
+        left: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+    }
+    
+    .serve-text {
+        font-size: 0.6rem;
+    }
+    
+    .serve-emoji {
+        font-size: 0.8rem;
     }
     
     /* 超小屏幕运动选择优化 */
@@ -1244,6 +1413,22 @@ body.theme-red-blue .reset-btn:hover {
     .set-btn, .reset-btn {
         padding: 0.75rem;
         font-size: 1rem;
+    }
+    
+    /* 超小高度屏幕发球提示调整 */
+    .serve-indicator {
+        top: 0.25rem;
+        left: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+    }
+    
+    .serve-text {
+        font-size: 0.6rem;
+    }
+    
+    .serve-emoji {
+        font-size: 0.8rem;
     }
     
     /* 超小高度屏幕运动选择优化 */
