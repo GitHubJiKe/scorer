@@ -72,6 +72,9 @@ function initializeApp() {
     // 初始化运动员姓名
     initializePlayerNames();
     
+    // 初始化移动端视口高度
+    initializeMobileViewport();
+    
     console.log('应用初始化完成');
 }
 
@@ -622,6 +625,38 @@ function updateFullscreenUI() {
         } else {
             scorerPage.classList.remove('fullscreen-mode');
         }
+    }
+}
+
+function initializeMobileViewport() {
+    // 设置初始视口高度
+    updateViewportHeight();
+    
+    // 监听视口变化
+    window.addEventListener('resize', updateViewportHeight);
+    window.addEventListener('orientationchange', updateViewportHeight);
+    
+    // 监听虚拟键盘显示/隐藏
+    if ('visualViewport' in window) {
+        window.visualViewport.addEventListener('resize', updateViewportHeight);
+    }
+}
+
+function updateViewportHeight() {
+    // 获取实际视口高度
+    const vh = window.innerHeight * 0.01;
+    const dvh = window.innerHeight * 0.01;
+    
+    // 更新CSS变量
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    document.documentElement.style.setProperty('--dvh', `${dvh}px`);
+    
+    // 移动端特殊处理
+    if (window.innerWidth <= 768) {
+        const mobileHeaderHeight = 4;
+        const mobileFooterHeight = 6;
+        document.documentElement.style.setProperty('--mobile-header-height', `${mobileHeaderHeight}rem`);
+        document.documentElement.style.setProperty('--mobile-footer-height', `${mobileFooterHeight}rem`);
     }
 }
 

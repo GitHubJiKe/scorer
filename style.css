@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+/* CSS变量定义 */
+:root {
+    --vh: 1vh;
+    --dvh: 1dvh;
+    --mobile-header-height: 4rem;
+    --mobile-footer-height: 6rem;
+}
+
 html {
     /* 禁用双击缩放 */
     touch-action: manipulation;
@@ -740,6 +748,66 @@ body.theme-red-blue .fullscreen-btn:hover {
     }
 }
 
+/* 移动端浏览器特殊优化 - 解决顶部栏遮挡问题 */
+@media (max-width: 48rem) and (max-height: 50rem) {
+    .page {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    .header {
+        margin-top: 1rem;
+    }
+    
+    .scorer-container {
+        min-height: calc(100vh - 8rem);
+        justify-content: space-between;
+    }
+    
+    .set-controls {
+        margin-top: auto;
+        padding-bottom: 1rem;
+    }
+    
+    /* 确保按钮在底部可见 */
+    .set-btn, .reset-btn {
+        min-height: 3rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* 移动端浏览器viewport高度适配 */
+@media (max-width: 48rem) {
+    .page {
+        min-height: 100vh;
+        min-height: 100dvh; /* 动态视口高度 */
+    }
+    
+    .scorer-container {
+        min-height: calc(100vh - 6rem);
+        min-height: calc(100dvh - 6rem);
+    }
+    
+    /* 确保内容不会超出屏幕 */
+    .scoreboard {
+        max-height: calc(100vh - 12rem);
+        max-height: calc(100dvh - 12rem);
+        overflow: hidden;
+    }
+    
+    /* 移动端按钮优化 */
+    .set-controls {
+        position: sticky;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem;
+        margin: 0 -0.5rem;
+        border-radius: 1rem 1rem 0 0;
+        box-shadow: 0 -0.25rem 1rem rgba(0, 0, 0, 0.1);
+    }
+}
+
 /* 全屏模式下的超小屏幕优化 */
 @media (max-width: 30rem) {
     .fullscreen-mode .score {
@@ -762,6 +830,104 @@ body.theme-red-blue .fullscreen-btn:hover {
     .fullscreen-mode .current-set {
         font-size: 1.1rem;
         padding: 0.5rem 1rem;
+    }
+}
+
+/* 全屏模式下的移动端高度优化 */
+@media (max-width: 48rem) and (max-height: 50rem) {
+    .fullscreen-mode .scorer-container {
+        height: 100vh;
+        height: 100dvh;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+    
+    .fullscreen-mode .scoreboard {
+        flex: 1;
+        max-height: calc(100vh - 2rem);
+        max-height: calc(100dvh - 2rem);
+        padding: 0.5rem;
+        overflow: hidden;
+    }
+    
+    .fullscreen-mode .score {
+        font-size: 6rem;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fullscreen-mode .player-name {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fullscreen-mode .sets {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fullscreen-mode .vs-text {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fullscreen-mode .current-set {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .fullscreen-mode .player {
+        padding: 1rem;
+        min-height: auto;
+    }
+}
+
+/* 全屏模式下的移动端通用优化 */
+@media (max-width: 48rem) {
+    .fullscreen-mode .scorer-container {
+        height: 100vh;
+        height: 100dvh;
+        padding: 0.5rem;
+        box-sizing: border-box;
+    }
+    
+    .fullscreen-mode .scoreboard {
+        flex: 1;
+        max-height: calc(100vh - 1rem);
+        max-height: calc(100dvh - 1rem);
+        padding: 0.5rem;
+        overflow: hidden;
+    }
+    
+    .fullscreen-mode .score {
+        font-size: 7rem;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fullscreen-mode .player-name {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fullscreen-mode .sets {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fullscreen-mode .vs-text {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .fullscreen-mode .current-set {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .fullscreen-mode .player {
+        padding: 0.75rem;
+        min-height: auto;
     }
 }
 
